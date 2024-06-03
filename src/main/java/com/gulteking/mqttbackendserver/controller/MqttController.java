@@ -21,7 +21,7 @@ public class MqttController {
 
     @PostMapping("publish")
     public void publishMessage(@RequestBody @Valid MqttPublishModel messagePublishModel,
-                               BindingResult bindingResult) throws org.eclipse.paho.client.mqttv3.MqttException {
+            BindingResult bindingResult) throws org.eclipse.paho.client.mqttv3.MqttException {
         if (bindingResult.hasErrors()) {
             throw new MqttException(ExceptionMessages.SOME_PARAMETERS_INVALID);
         }
@@ -35,7 +35,7 @@ public class MqttController {
 
     @GetMapping("subscribe")
     public List<MqttSubscribeModel> subscribeChannel(@RequestParam(value = "topic") String topic,
-                                                     @RequestParam(value = "wait_millis") Integer waitMillis)
+            @RequestParam(value = "wait_millis") Integer waitMillis)
             throws InterruptedException, org.eclipse.paho.client.mqttv3.MqttException {
         List<MqttSubscribeModel> messages = new ArrayList<>();
         CountDownLatch countDownLatch = new CountDownLatch(10);
@@ -52,6 +52,5 @@ public class MqttController {
 
         return messages;
     }
-
 
 }
